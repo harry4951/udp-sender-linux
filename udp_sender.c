@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
    unsigned int length;
    struct sockaddr_in server, from;
    struct hostent *hp;
-   char buffer[256];
+   char buffer[32];
    FILE *myfile;
    float myvariable;
    float *ptrmyvariable = &myvariable;
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
    server.sin_port = htons(atoi(argv[2]));
    length=sizeof(struct sockaddr_in);
 
-   myfile=fopen("myfile.txt", "r");
+   myfile=fopen("sound.txt", "r");
  /*  while(1)
    {
        printf("Please enter the message: ");
@@ -59,14 +59,14 @@ int main(int argc, char *argv[])
   //for(i = 0; i < HEIGHT; i++)
   //{
    // for (j = 0 ; j < WIDTH; j++)
-//while(i=fread(buffer,sizeof(buffer), 1, fp))
-while (fscanf(myfile, "%f", &myvariable) != EOF)
+while(i=fread(buffer,sizeof(buffer), 1, myfile))
+//while (fscanf(myfile, "%f", &myvariable) != EOF)
 {
       //fscanf(myfile,"%f",&myvariable);
-      n=sendto(sock,ptrmyvariable,
-                sizeof(myvariable),0,(const struct sockaddr *)&server,length);
+      n=sendto(sock,buffer,
+                sizeof(buffer),0,(const struct sockaddr *)&server,length);
        if (n < 0) error("Sendto");
-      printf("%14.12f ",myvariable);
+      printf("%s ",buffer);
     //}
     printf("\n");
 }
